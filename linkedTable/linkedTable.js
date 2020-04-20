@@ -5,7 +5,7 @@ class Node {
     }
 }
 class LinkedTable {
-    constructor(head, rear) {
+    constructor(head,rear) {
         this.head = head
         this.rear = rear
     }
@@ -26,7 +26,8 @@ class LinkedTable {
         }
         return new LinkedTable(head, rear)
     }
-    add (node) {
+    add (ele) {
+        let node = new Node(ele)
         if (!this.rear.next) {
             this.rear.next = node
         }
@@ -54,14 +55,36 @@ class LinkedTable {
             }
         }
     }
+    deleteFirst() {
+        if (!this.head.next) return null
+        let node = this.head.next
+        this.head.next = node.next
+        node.next = null
+        return node
+    }
+
+    firstEle() {
+        return this.head.next
+    }
+
+    length() {
+        let length = 0
+        let temp = this.head
+        while (temp.next){
+            length++
+            temp = temp.next
+        }
+        return length
+    }
 }
 function test() {
     let linkedTable = LinkedTable.convert([1,2,3,3,2,3,4,3])
     console.log(linkedTable.print())
-    let node = new Node(3)
-    linkedTable.add(node)
+    linkedTable.add(3)
     console.log(linkedTable.print())
     linkedTable.delete(3)
     console.log(linkedTable.print())
 }
-test()
+// arrayMatchBrackets()
+
+export {Node, LinkedTable};
