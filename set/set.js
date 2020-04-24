@@ -1,14 +1,15 @@
 class MySet {
+    #ele= {};
     constructor() {
-        this.ele = {}
         this.length = 0
     }
     has (val) {
-        return this.ele.hasOwnProperty(val)
+        return this.#ele.hasOwnProperty(val)
+        // return ee? #ele.hasOwnProperty(val) : false
     }
     add (val) {
         if (!this.has(val)){
-            this.ele[val] = null
+            this.#ele[val] = null
             this.length++
             return true
         }
@@ -16,14 +17,14 @@ class MySet {
     }
     remove(val){
         if(this.has(val)){
-            delete this.ele[val]
+            delete this.#ele[val]
             this.length--;
             return true;
         }
         return false;
     }
     clear () {
-        this.ele = {}
+        this.#ele = {}
         this.length = 0
         return true
     }
@@ -31,11 +32,12 @@ class MySet {
         return length
     }
     print () {
-        return Object.keys(this.ele)
+        return Object.keys(this.#ele)
     }
 }
 let mySet = new MySet()
 mySet.add(1)
+console.log(mySet.ele)
 mySet.add(2)
 mySet.add(2)
 mySet.add(3)
