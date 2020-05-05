@@ -51,8 +51,16 @@ var fib4 = function(n) {
         return cache[n];
     }
 };
+var fib5 = function (n) {
+    let a = Math.sqrt(5)
+    return (Math.round((Math.pow(((1 + a) / 2), n) - Math.pow(((1 - a) / 2), n)) / a)) % 1000000007
+};
 
 
-console.log(fib2(50000))
+
+
+
+
+console.log(fib5(10))
 
 
