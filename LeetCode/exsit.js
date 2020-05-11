@@ -25,7 +25,7 @@ var exist1 = function (board, word) {
     }
     return map
 };
-var exist = function (board, word) {
+var exist2 = function (board, word) {
     let dfs = function (board, word, i, j, k) {
         if (i < 0 || j < 0 || i >= board.length || j >= board[i].length || k >= word.length || !board[i][j]) {
             return false;
@@ -62,4 +62,4 @@ let board = [
     ["A", "D", "E", "E"]
 ]
 let word = "ABCCED"
-console.log(exist(board, word))
+console.log(exist2(board, word))
