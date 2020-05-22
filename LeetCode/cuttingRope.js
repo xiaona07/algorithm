@@ -39,4 +39,55 @@ var cuttingRope2 = function(n) {
     }
     return dp[n]
 };
-console.log(cuttingRope2(9))
+var cuttingRope3 = function(n) {
+    if (n === 2) {
+        return 1
+    }
+    if (n === 3) {
+        return 2
+    }
+    let a = Math.floor(n / 3);
+    let b = n % 3
+    let res = 1
+    for (let i = 0; i < a ; i++) {
+        res = (res * 3) % (1e9+7)
+    }
+    if (b === 0) {
+        return res
+    }
+    if (b === 1) {
+        return ((res / 3) * 4) % (1e9+7)
+    }
+    return (res * 2) % (1e9+7)
+};
+var cuttingRope4 = function(n) {
+    if (n === 2) {
+        return 1
+    }
+    if (n === 3) {
+        return 2
+    }
+    if (n === 4) {
+        return 4
+    }
+    if (n === 5) {
+        return 6
+    }
+    if (n === 6) {
+        return 9
+    }
+    let a = Math.floor(n / 3);
+    let b = n % 3
+    let res = 1
+    for (let i = 1; i < a ; i++) {
+        res = (res * 3) % (1e9+7)
+    }
+    if (b === 0) {
+        return (res * 3) % (1e9+7)
+    }
+    if (b === 1) {
+        return (res * 4) % (1e9+7)
+    }
+    return (res * 6) % (1e9+7)
+};
+console.log(cuttingRope3(127))
