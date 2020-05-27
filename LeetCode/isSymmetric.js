@@ -100,6 +100,17 @@ var isSymmetric = function (root) {
 };
 
 
+var isSymmetric = function (root) {
+    return !root ? true : check(root.left, root.right);
+};
+
+function check(left, right) {
+    if (!left && !right) return true
+    if(!left || !right || left.val !== right.val) return false;
+    return check(left.left, right.right) && check(left.right, right.left);
+}
+
+
 // let a = new TreeNode(1)
 // let b = new TreeNode(2)
 // let c = new TreeNode(2)
