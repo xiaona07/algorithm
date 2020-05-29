@@ -29,3 +29,21 @@ var pathSum = function(root, sum) {
     find(root, sum, [])
     return res
 };
+
+var pathSum = function (root, sum) {
+    let allPath = []
+    let path = []
+    let dfs = function(root, sum) {
+        if(!root) return
+        path.push(root.val)
+        sum -= root.val
+        if (sum === 0 && !root.left && !root.right) {
+            allPath.push(path.slice(0))
+        }
+        dfs(root.left, sum)
+        dfs(root.right, sum)
+        path.pop()
+    }
+    dfs(root,sum)
+    return allPath
+};
