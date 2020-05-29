@@ -36,3 +36,26 @@ var copyRandomList = function (head) {
     }
     return empty.next
 };
+function Node(val, next, random) {
+    this.val = val;
+    this.next = next;
+    this.random = random;
+}
+
+/**
+ * 深度优先遍历复制
+ * @param {Node} head
+ * @returns {null|Node}
+ */
+var copyRandomList = function (head) {
+    let visited = {}
+    let dfs = function (head) {
+        if(!head) return null
+        if(visited[head]) return visited[head]
+        let copy = new Node(head.val,null,null)
+        copy.next=dfs(head.next)
+        copy.random=dfs(head.random)
+        return copy
+    }
+    return dfs(head)
+}
