@@ -10,6 +10,24 @@
  * @param {Node} root
  * @return {Node}
  */
+var treeToDoublyList = function (root) {
+    let pre = null, head = null;
+    let dfs = function (cur) {
+        if(cur == null) return;
+        dfs(cur.left);
+        if(pre != null) pre.right = cur;
+        else head = cur;
+        cur.left = pre;
+        pre = cur;
+        dfs(cur.right);
+    }
+    if(root == null) return null;
+    dfs(root);
+    head.left = pre;
+    pre.right = head;
+    return head;
+
+};
 var treeToDoublyList = function(root) {
     if (!root) return null
     let left = root, right = root
