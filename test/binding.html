@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box"></div>
+  <input type="text" id="inp">
+</body>
+<script>
+  let target = {}
+  let box = document.querySelector('#box')
+  let inp = document.querySelector('#inp')
+  let handler = {
+    get: function (target, key) {
+      return target[key];
+    },
+    set: function (target, key, newVal) {
+      target[key] = newVal;
+      inp.value = newVal;
+      box.innerHTML = newVal;
+    }
+  }
+  let proxy = new Proxy(target, handler)
+  inp.addEventListener('input', function (e) {
+    proxy.name = e.target.value;
+  });
+  proxy.name
+  proxy.name = 'haha';
+
+
+</script>
+
+</html>
