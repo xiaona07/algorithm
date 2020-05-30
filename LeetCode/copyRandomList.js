@@ -36,6 +36,7 @@ var copyRandomList = function (head) {
     }
     return empty.next
 };
+
 function Node(val, next, random) {
     this.val = val;
     this.next = next;
@@ -50,12 +51,12 @@ function Node(val, next, random) {
 var copyRandomList = function (head) {
     let visited = new Map()
     let dfs = function (head) {
-        if(!head) return null
-        if(visited.get(head)) return visited.get(head)
-        let copy = new Node(head.val,null,null)
-        visited.set(head,copy)
-        copy.next=dfs(head.next)
-        copy.random=dfs(head.random)
+        if (!head) return null
+        if (visited.get(head)) return visited.get(head)
+        let copy = new Node(head.val, null, null)
+        visited.set(head, copy)
+        copy.next = dfs(head.next)
+        copy.random = dfs(head.random)
         return copy
     }
     return dfs(head)
@@ -67,30 +68,31 @@ var copyRandomList = function (head) {
  * @returns {null|Node}
  */
 var copyRandomList = function (head) {
+    if (!head) return null
+    let copy = new Node(head.val, null, null)
     let visited = new Map()
-    let bfs = function (head) {
-        if(!head) return null
-        let copy = new Node(head.val,null,null)
-        let queue = []
-        queue.push(head)
-        visited.set(head,copy)
-        while (queue.length) {
-            let node = queue.shift()
-            if (node.next && !visited.get(node.next)) {
-                visited.set(node.next,new Node(node.next.val, null, null))
-                if(node.next) queue.push(node.next)
-            }
-            if (node.random && !visited[node.random]) {
-                visited.set(node.random,new Node(node.random.val, null, null))
-                if(node.random) queue.push(node.random)
-            }
-            visited.get(node).next=visited.get(node.next)
-            visited.get(node).random=visited.get(node.random)
-
+    let queue = []
+    queue.push(head)
+    visited.set(head, copy)
+    while (queue.length) {
+        let node = queue.shift()
+        if (node.next && !visited.get(node.next)) {
+            visited.set(node.next, new Node(node.next.val, null, null))
+            queue.push(node.next)
         }
-        return copy
+
+        if (node.random && !visited.get(node.random)) {
+            visited.set(node.random, new Node(node.random.val, null, null))
+            queue.push(node.random)
+        }
+        if (node.next) {
+            visited.get(node).next = visited.get(node.next)
+        }
+        if (node.random) {
+            visited.get(node).random = visited.get(node.random)
+        }
     }
-    return bfs(head)
+    return copy
 }
 /**
  * 直接遍历
@@ -100,20 +102,20 @@ var copyRandomList = function (head) {
 var copyRandomList = function (head) {
     let visited = new Map()
     let getClonedNode = function (node) {
-        if(!node) return null
-        if(visited.get(node)) return visited.get(node)
-        visited.set(node,new Node(node.val,null,null))
+        if (!node) return null
+        if (visited.get(node)) return visited.get(node)
+        visited.set(node, new Node(node.val, null, null))
         return visited.get(node)
     };
-    if(!head) return head
+    if (!head) return head
     let oldNode = head
-    let newNode = new Node(oldNode.val,null,null)
-    visited.set(oldNode,newNode)
+    let newNode = new Node(oldNode.val, null, null)
+    visited.set(oldNode, newNode)
     while (oldNode) {
-        newNode.next=getClonedNode(oldNode.next)
-        newNode.random=getClonedNode(oldNode.random)
-        oldNode=oldNode.next
-        newNode=newNode.next
+        newNode.next = getClonedNode(oldNode.next)
+        newNode.random = getClonedNode(oldNode.random)
+        oldNode = oldNode.next
+        newNode = newNode.next
     }
     return visited.get(head)
 }
@@ -123,17 +125,17 @@ var copyRandomList = function (head) {
  * @returns {null|Node}
  */
 var copyRandomList = function (head) {
-    if(!head) return head
+    if (!head) return head
     let cur = head
     while (cur) {
-        let newNode = new Node(cur.val,null,null)
-        newNode.next=cur.next
+        let newNode = new Node(cur.val, null, null)
+        newNode.next = cur.next
         cur.next = newNode
         cur = newNode.next
     }
     cur = head
     while (cur) {
-        cur.next.random = cur.random?cur.random.next:null
+        cur.next.random = cur.random ? cur.random.next : null
         cur = cur.next.next
     }
     let curOld = head
@@ -141,9 +143,9 @@ var copyRandomList = function (head) {
     let newHead = head.next
     while (curOld) {
         curOld.next = curOld.next.next
-        curNew.next = curNew.next?curNew.next.next:null
-        curOld=curOld.next
-        curNew=curNew.next
+        curNew.next = curNew.next ? curNew.next.next : null
+        curOld = curOld.next
+        curNew = curNew.next
     }
     return newHead
 }
