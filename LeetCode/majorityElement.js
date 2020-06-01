@@ -17,3 +17,14 @@ var majorityElement = function(nums) {
         }
         return null
     };
+
+var majorityElement = function(nums) {
+    let res =0,votes = 0
+    for (let num of nums) {
+        if (votes === 0) res = num
+        votes += (num === res ? 1 : -1);
+    }
+    return res
+};
+
+console.log(majorityElement([1,2,3,2,2,2,5,4,2]))
