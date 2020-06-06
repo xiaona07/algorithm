@@ -117,3 +117,36 @@ var getLeastNumbers4 = function(arr, k) {
     }
     return tree
 };
+var getLeastNumbers5 = function(arr, k) {
+    let tree = arr.slice(0, k)
+    let len = tree.length - 1
+    let sort = function (tree) {
+        let index = Math.floor(tree.length / 2 - 1)
+        for (let i = index; i >= 0; i--) {
+            downSort(tree, i)
+        }
+    }
+    let downSort = function (tree, idx) {
+        let left = 2 * idx + 1
+        let right = 2 * idx + 2
+        if(left <= len && tree[idx] < tree[left]){
+            swap(tree, idx, left)
+            downSort(tree, left)
+        }
+        if(right <= len && tree[idx] < tree[right]){
+            swap(tree, idx, right)
+            downSort(tree, right)
+        }
+    };
+    let swap = function (tree, i, j){
+        [tree[i], tree[j]] = [tree[j], tree[i]]
+    }
+    sort(tree)
+    for (let i = k; i < arr.length; i++) {
+        if (tree[0] > arr[i]) {
+            tree[0] = arr[i]
+            downSort(tree, 0)
+        }
+    }
+    return tree
+};
