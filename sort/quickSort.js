@@ -29,6 +29,8 @@ var partition = function (arr, l, r) {
 var swap = function (arr, i, j) {
     [arr[i], arr[j]] = [arr[j], arr[i]]
 }
+
+
 let array = [7,6,5,4,3,2,1]
 console.log(quickSort(array, 0, array.length))
 let array2 = [3, 4, 2, 1, 7, 6, 8, 9, 2, 3, 4]
